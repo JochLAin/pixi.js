@@ -23,7 +23,7 @@ export class CanvasRenderTarget
     /**
      * @param width - the width for the newly created canvas
      * @param height - the height for the newly created canvas
-     * @param {number} [resolution=1] - The resolution / device pixel ratio of the canvas
+     * @param {number} [resolution=PIXI.settings.RESOLUTION] - The resolution / device pixel ratio of the canvas
      */
     constructor(width: number, height: number, resolution?: number)
     {
@@ -50,13 +50,13 @@ export class CanvasRenderTarget
     /**
      * Resizes the canvas to the specified width and height.
      *
-     * @param width - the new width of the canvas
-     * @param height - the new height of the canvas
+     * @param desiredWidth - the desired width of the canvas
+     * @param desiredHeight - the desired height of the canvas
      */
-    resize(width: number, height: number): void
+    resize(desiredWidth: number, desiredHeight: number): void
     {
-        this.canvas.width = width * this.resolution;
-        this.canvas.height = height * this.resolution;
+        this.canvas.width = Math.round(desiredWidth * this.resolution);
+        this.canvas.height = Math.round(desiredHeight * this.resolution);
     }
 
     /** Destroys this canvas. */
@@ -78,7 +78,7 @@ export class CanvasRenderTarget
 
     set width(val: number)
     {
-        this.canvas.width = val;
+        this.canvas.width = Math.round(val);
     }
 
     /**
@@ -93,6 +93,6 @@ export class CanvasRenderTarget
 
     set height(val: number)
     {
-        this.canvas.height = val;
+        this.canvas.height = Math.round(val);
     }
 }
